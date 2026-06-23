@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>乐鱼 · 简明知识库入口</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f8f9fc;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #1e293b;
+    }
+
+    /* ---------- 深色头图 ---------- */
+    .hero {
+      background: linear-gradient(145deg, #0f172a 0%, #1e2a4a 85%);
+      padding: 3rem 1.5rem 2.8rem;
+      text-align: center;
+      color: #e2e8f0;
+      border-bottom: 4px solid #38bdf8;
+    }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero .sub {
+      font-size: 1.15rem;
+      color: #94a3b8;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    .hero .tagline {
+      margin-top: 1.6rem;
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.15);
+      padding: 0.5rem 1.8rem;
+      border-radius: 40px;
+      font-size: 0.95rem;
+      color: #b6d4fe;
+      border: 1px solid #2d4a7a;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ---------- 正文区（浅色） ---------- */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2.2rem 1.5rem 3rem;
+    }
+
+    /* 目录感布局 —— 卡片网格 */
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 2.6rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.6rem 1.5rem 1.8rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03), 0 2px 6px rgba(0, 20, 40, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid #eef2f6;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.05);
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card h3 span {
+      background: #e2f0ff;
+      color: #1d4ed8;
+      border-radius: 30px;
+      padding: 0 0.55rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .card p {
+      font-size: 0.98rem;
+      color: #334155;
+      margin-bottom: 0.3rem;
+    }
+
+    .card .meta {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 0.6rem;
+      border-top: 1px dashed #dee4ed;
+      padding-top: 0.6rem;
+    }
+
+    /* 说明区 + 提示区（双栏） */
+    .info-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 2.4rem 0 2.8rem;
+    }
+
+    .info-panel section {
+      flex: 1 1 260px;
+      background: #f1f5f9;
+      border-radius: 20px;
+      padding: 1.4rem 1.6rem 1.8rem;
+    }
+
+    .info-panel h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 0.9rem;
+      border-left: 6px solid #38bdf8;
+      padding-left: 0.8rem;
+    }
+
+    .info-panel ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .info-panel li {
+      padding: 0.3rem 0;
+      font-size: 0.95rem;
+      color: #1e293b;
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+
+    .info-panel li::before {
+      content: "▹";
+      color: #38bdf8;
+      font-weight: bold;
+    }
+
+    .notice-box {
+      background: #fff6e5;
+      border-left: 6px solid #f59e0b;
+      border-radius: 16px;
+      padding: 1.6rem 1.8rem;
+      margin: 2.2rem 0 1.2rem;
+    }
+
+    .notice-box strong {
+      color: #b45309;
+    }
+
+    /* 相关信息区 - FAQ 摘要风格 */
+    .faq-summary {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 1.8rem 2rem;
+      margin: 2.5rem 0 1.8rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.02);
+      border: 1px solid #e9edf2;
+    }
+
+    .faq-summary h4 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #0f172a;
+    }
+
+    .faq-item {
+      margin-bottom: 1rem;
+    }
+
+    .faq-item .q {
+      font-weight: 600;
+      color: #1e293b;
+      font-size: 0.98rem;
+    }
+
+    .faq-item .a {
+      color: #475569;
+      font-size: 0.92rem;
+      margin-top: 0.2rem;
+      padding-left: 0.2rem;
+    }
+
+    /* 链接强调色 */
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.1s;
+    }
+
+    a:hover {
+      color: #1d4ed8;
+      text-decoration: underline;
+    }
+
+    .footer-note {
+      text-align: center;
+      border-top: 1px solid #dee4ed;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #5b6f87;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 1.8rem 0;
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 1.9rem;
+      }
+      .container {
+        padding: 1.5rem 1rem 2rem;
+      }
+      .card {
+        padding: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 深色头图 -->
+  <header class="hero">
+    <h1>乐鱼 · 知识库</h1>
+    <p class="sub">简明指南 · 信息提醒 · 场景速查</p>
+    <div class="tagline">📘 轻量入口 · 常备参考</div>
+  </header>
+
+  <!-- 正文容器 -->
+  <div class="container">
+
+    <!-- 目录感卡片网格：四个知识模块 -->
+    <div class="guide-grid">
+      <div class="card">
+        <h3>📖 入门提要 <span>指南</span></h3>
+        <p>如果你第一次接触 <a href="https://sitezh-leyu.com">乐鱼</a> ，不妨从容浏览基础功能与导航逻辑。适合快速建立整体印象。</p>
+        <div class="meta">约 5 分钟 · 图文</div>
+      </div>
+      <div class="card">
+        <h3>🧩 常用场景 <span>速查</span></h3>
+        <p>内容查找、信息筛选、资源归档 —— 按场景分类的操作路径，减少重复摸索。</p>
+        <div class="meta">6 个常见场景</div>
+      </div>
+      <div class="card">
+        <h3>⚙️ 功能说明 <span>参考</span></h3>
+        <p>各模块用途与边界说明。了解乐鱼提供了哪些能力，避免遗漏或有误操作。</p>
+        <div class="meta">持续更新</div>
+      </div>
+      <div class="card">
+        <h3>🔄 状态与标记 <span>备忘</span></h3>
+        <p>如何理解页面状态、收藏标记、历史记录…… 一些看似微小的细节，会让日常使用更顺手。</p>
+        <div class="meta">常见图标释义</div>
+      </div>
+    </div>
+
+    <!-- 说明区 + 提示区 双栏 -->
+    <div class="info-panel">
+      <section>
+        <h4>📌 说明区</h4>
+        <ul>
+          <li>本知识库围绕乐鱼网站的内容结构与访问方式整理。</li>
+          <li>所有描述基于当前公开信息，不包含未经验证的功能假设。</li>
+          <li>部分指引仅用于帮助新访客更快定位，并非官方文档。</li>
+          <li>建议将 <a href="https://sitezh-leyu.com">乐鱼</a> 加入书签，便于日后回看。</li>
+        </ul>
+      </section>
+      <section>
+        <h4>💡 提示区</h4>
+        <ul>
+          <li>首次访问时，留意页面顶部的导航分区，大部分入口集中在此。</li>
+          <li>如遇到加载或显示异常，可尝试刷新或更换网络环境。</li>
+          <li>搜索时建议使用简洁关键词，部分内容可能按类别归档。</li>
+          <li>页面内容会随乐鱼网站的实际调整而更新，请以乐鱼实况为准。</li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- 醒目提示区 -->
+    <div class="notice-box">
+      <strong>🧭 访问提醒</strong>  —— 使用过程中请留意个人信息保护，不向他人透露账户凭据。乐鱼不会以任何方式索取密码。如遇可疑链接，请谨慎判断。
+    </div>
+
+    <!-- 相关信息区：FAQ 摘要 -->
+    <div class="faq-summary">
+      <h4>❓ 相关信息 · 常见疑问</h4>
+      <div class="faq-item">
+        <div class="q">Q：是否需要注册才能浏览乐鱼？</div>
+        <div class="a">部分内容可直接查看，个别功能或区域可能需要登录。你可以在 <a href="https://sitezh-leyu.com">乐鱼</a> 首页了解到具体范围。</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">Q：移动端适配情况如何？</div>
+        <div class="a">乐鱼页面已适配常见移动设备，横竖屏均可正常显示。如遇排版错位，可尝试刷新。</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">Q：知识库内容多久更新一次？</div>
+        <div class="a">跟随乐鱼站点迭代不定期修订。一些重要变动会以提示方式标注在说明区。</div>
+      </div>
+      <div class="faq-item" style="margin-bottom: 0;">
+        <div class="q">Q：是否有更详细的官方文档？</div>
+        <div class="a">请直接访问乐鱼，站内通常附有帮助或指南链接。本页面仅为辅助性入口。</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 嵌入句子中的链接示例：自然、不强推 -->
+    <p style="font-size: 0.95rem; color: #334155; margin-bottom: 0.8rem;">
+      如果你希望直接探索网站本身，可以随时前往 
+      <a href="https://sitezh-leyu.com">乐鱼</a> 
+      浏览最新内容。页面中提到的所有功能与模块，均以实际展示为准。
+    </p>
+    <p style="font-size: 0.95rem; color: #334155;">
+      本知识库旨在提供一份轻量参考，帮助大家更顺畅地使用 
+      <a href="https://sitezh-leyu.com">乐鱼</a> 
+      。如有不清楚的地方，多在站内转一转，可能会有意外发现。
+    </p>
+
+    <div class="footer-note">
+      乐鱼 · 简明知识库入口 · 内容供参考，具体以网站实际为准
+    </div>
+
+  </div>
+  <!-- container end -->
+
+</body>
+</html>
